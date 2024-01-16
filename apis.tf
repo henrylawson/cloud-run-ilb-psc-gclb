@@ -30,6 +30,11 @@ resource "google_project_service_identity" "compute" {
   service = google_project_service.compute.service
 }
 
+resource "google_project_service" "dns_consumer" {
+  project = var.consumer_project
+  service = "dns.googleapis.com"
+}
+
 resource "google_project_service" "compute_consumer" {
   project = var.consumer_project
   service = "compute.googleapis.com"
