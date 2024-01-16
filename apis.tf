@@ -30,11 +30,6 @@ resource "google_project_service_identity" "compute" {
   service = google_project_service.compute.service
 }
 
-resource "google_project_service" "dns_consumer" {
-  project = var.consumer_project
-  service = "dns.googleapis.com"
-}
-
 resource "google_project_service" "compute_consumer" {
   project = var.consumer_project
   service = "compute.googleapis.com"
@@ -45,4 +40,14 @@ resource "google_project_service_identity" "compute_consumer" {
 
   project = google_project_service.compute_consumer.project
   service = google_project_service.compute_consumer.service
+}
+
+resource "google_project_service" "dns" {
+  project = var.producer_project
+  service = "dns.googleapis.com"
+}
+
+resource "google_project_service" "dns_consumer" {
+  project = var.consumer_project
+  service = "dns.googleapis.com"
 }
