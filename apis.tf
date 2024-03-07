@@ -5,6 +5,13 @@ resource "google_project_service" "run" {
   disable_dependent_services = false
 }
 
+resource "google_project_service" "vpcaccess" {
+  project                    = var.producer_project
+  service                    = "vpcaccess.googleapis.com"
+  disable_on_destroy         = false
+  disable_dependent_services = false
+}
+
 resource "google_project_service_identity" "run" {
   provider = google-beta
 
