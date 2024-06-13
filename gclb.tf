@@ -1,12 +1,12 @@
 resource "google_compute_global_address" "gclb" {
   provider   = google-beta
-  project    = var.consumer_project
+  project    = var.ingress_project
   name       = "hello-service-public"
   depends_on = [google_project_service.compute_consumer]
 }
 
 resource "google_compute_global_forwarding_rule" "gclb" {
-  project               = var.consumer_project
+  project               = var.ingress_project
   name                  = "hello-service-public"
   provider              = google-beta
   ip_protocol           = "TCP"
@@ -18,7 +18,7 @@ resource "google_compute_global_forwarding_rule" "gclb" {
 }
 
 resource "google_compute_target_http_proxy" "gclb" {
-  project  = var.consumer_project
+  project  = var.ingress_project
   name     = "hello-service-public"
   provider = google-beta
   url_map  = google_compute_url_map.gclb.id
@@ -28,7 +28,7 @@ resource "google_compute_target_http_proxy" "gclb" {
 }
 
 resource "google_compute_url_map" "gclb" {
-  project         = var.consumer_project
+  project         = var.ingress_project
   name            = "hello-service-public"
   provider        = google-beta
   default_service = google_compute_backend_service.gclb.id
@@ -36,7 +36,7 @@ resource "google_compute_url_map" "gclb" {
 }
 
 resource "google_compute_backend_service" "gclb" {
-  project = var.consumer_project
+  project = var.ingress_project
   name    = "hello-service-public"
 
   load_balancing_scheme = "EXTERNAL_MANAGED"

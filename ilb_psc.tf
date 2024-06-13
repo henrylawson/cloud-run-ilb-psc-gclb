@@ -11,7 +11,7 @@ resource "google_compute_subnetwork" "psc_syd" {
 }
 
 resource "google_compute_service_attachment" "syd" {
-  project = var.producer_project
+  project = var.ingress_project
   name    = "hello-syd"
   region  = "australia-southeast1"
 
@@ -34,7 +34,7 @@ resource "google_compute_subnetwork" "psc_mel" {
 }
 
 resource "google_compute_service_attachment" "mel" {
-  project = var.producer_project
+  project = var.ingress_project
   name    = "hello-mel"
   region  = "australia-southeast2"
 

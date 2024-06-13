@@ -1,9 +1,9 @@
-variable "producer_project" {
+variable "apps_project" {
   type    = string
   default = "hgl-env-cloud-run-psc1"
 }
 
-variable "consumer_project" {
+variable "ingress_project" {
   type    = string
   default = "hgl-env-cloud-run-psc2"
 }

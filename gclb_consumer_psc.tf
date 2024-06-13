@@ -1,6 +1,6 @@
 resource "google_compute_region_network_endpoint_group" "syd_psc" {
-  project               = var.consumer_project
-  name                  = "hello-au-syd"
+  project               = var.ingress_project
+  name                  = "hello-au-syd-consumer"
   network_endpoint_type = "PRIVATE_SERVICE_CONNECT"
   region                = "australia-southeast1"
   depends_on            = [google_project_service.compute_consumer]
@@ -10,8 +10,8 @@ resource "google_compute_region_network_endpoint_group" "syd_psc" {
 }
 
 resource "google_compute_region_network_endpoint_group" "mel_psc" {
-  project               = var.consumer_project
-  name                  = "hello-au-mel"
+  project               = var.ingress_project
+  name                  = "hello-au-mel-consumer"
   network_endpoint_type = "PRIVATE_SERVICE_CONNECT"
   region                = "australia-southeast2"
   depends_on            = [google_project_service.compute_consumer]

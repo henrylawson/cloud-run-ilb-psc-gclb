@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "status" {
-  project                     = var.producer_project
+  project                     = var.apps_project
   name                        = "cloud-run-status-files-423h"
   location                    = "australia-southeast1"
   force_destroy               = true

@@ -1,12 +1,12 @@
 resource "google_project_service" "run" {
-  project                    = var.producer_project
+  project                    = var.apps_project
   service                    = "run.googleapis.com"
   disable_on_destroy         = false
   disable_dependent_services = false
 }
 
 resource "google_project_service" "vpcaccess" {
-  project                    = var.producer_project
+  project                    = var.apps_project
   service                    = "vpcaccess.googleapis.com"
   disable_on_destroy         = false
   disable_dependent_services = false
@@ -20,13 +20,13 @@ resource "google_project_service_identity" "run" {
 }
 
 resource "google_project_iam_member" "run_user" {
-  project = var.producer_project
+  project = var.apps_project
   role    = "roles/run.serviceAgent"
   member  = "serviceAccount:${google_project_service_identity.run.email}"
 }
 
 resource "google_project_service" "compute" {
-  project = var.producer_project
+  project = var.apps_project
   service = "compute.googleapis.com"
 }
 
@@ -38,7 +38,7 @@ resource "google_project_service_identity" "compute" {
 }
 
 resource "google_project_service" "compute_consumer" {
-  project = var.consumer_project
+  project = var.ingress_project
   service = "compute.googleapis.com"
 }
 
@@ -50,12 +50,12 @@ resource "google_project_service_identity" "compute_consumer" {
 }
 
 resource "google_project_service" "dns" {
-  project = var.producer_project
+  project = var.apps_project
   service = "dns.googleapis.com"
 }
 
 resource "google_project_service" "dns_consumer" {
-  project = var.consumer_project
+  project = var.ingress_project
   service = "dns.googleapis.com"
 }
 

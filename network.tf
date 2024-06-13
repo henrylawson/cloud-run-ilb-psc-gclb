@@ -6,10 +6,10 @@ resource "google_compute_shared_vpc_host_project" "host" {
 
 resource "google_compute_shared_vpc_service_project" "service1" {
   host_project    = google_compute_shared_vpc_host_project.host.project
-  service_project = var.producer_project
+  service_project = var.apps_project
 }
 
 resource "google_compute_shared_vpc_service_project" "service2" {
   host_project    = google_compute_shared_vpc_host_project.host.project
-  service_project = var.consumer_project
+  service_project = var.ingress_project
 }

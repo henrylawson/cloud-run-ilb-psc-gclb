@@ -30,7 +30,7 @@ resource "google_dns_record_set" "producer_internal" {
           port               = 443
           ip_protocol        = "tcp"
           network_url        = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
-          project            = var.producer_project
+          project            = var.ingress_project
           region             = "australia-southeast1"
         }
       }
@@ -46,7 +46,7 @@ resource "google_dns_record_set" "producer_internal" {
           port               = 443
           ip_protocol        = "tcp"
           network_url        = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
-          project            = var.producer_project
+          project            = var.ingress_project
           region             = "australia-southeast2"
         }
       }

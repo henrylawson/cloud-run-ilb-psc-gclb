@@ -1,5 +1,5 @@
 resource "google_compute_instance" "ilb_test" {
-  project                   = var.producer_project
+  project                   = var.apps_project
   name                      = "ilb-test-instance"
   machine_type              = "n2-standard-2"
   zone                      = "us-central1-a"
