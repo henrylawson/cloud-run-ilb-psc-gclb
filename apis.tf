@@ -58,3 +58,13 @@ resource "google_project_service" "dns_consumer" {
   project = var.consumer_project
   service = "dns.googleapis.com"
 }
+
+resource "google_project_service" "compute_network" {
+  project = var.network_project
+  service = "compute.googleapis.com"
+}
+
+resource "google_project_service" "dns_network" {
+  project = var.network_project
+  service = "dns.googleapis.com"
+}

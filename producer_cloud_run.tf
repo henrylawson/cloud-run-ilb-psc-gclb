@@ -62,7 +62,7 @@ resource "google_vpc_access_connector" "au_syd_connector" {
   name          = "syd"
   region        = "australia-southeast1"
   ip_cidr_range = "10.9.0.0/28"
-  network       = "default"
+  network       = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
   max_instances = 3
   min_instances = 2
   machine_type  = "e2-standard-4"
@@ -151,7 +151,7 @@ resource "google_vpc_access_connector" "au_mel_connector" {
   name          = "mel"
   region        = "australia-southeast2"
   ip_cidr_range = "10.8.0.0/28"
-  network       = "default"
+  network       = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
   max_instances = 3
   min_instances = 2
   machine_type  = "e2-standard-4"

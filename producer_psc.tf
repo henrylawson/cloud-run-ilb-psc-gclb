@@ -1,12 +1,12 @@
 resource "google_compute_subnetwork" "psc_syd" {
   provider      = google-beta
-  project       = var.producer_project
+  project       = var.network_project
   name          = "psc-syd"
   ip_cidr_range = "10.2.0.0/24"
   region        = "australia-southeast1"
   purpose       = "PRIVATE_SERVICE_CONNECT"
   role          = "ACTIVE"
-  network       = "default"
+  network       = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
   depends_on    = [google_project_service.compute]
 }
 
@@ -23,13 +23,13 @@ resource "google_compute_service_attachment" "syd" {
 
 resource "google_compute_subnetwork" "psc_mel" {
   provider      = google-beta
-  project       = var.producer_project
+  project       = var.network_project
   name          = "psc-mel"
   ip_cidr_range = "10.3.0.0/24"
   region        = "australia-southeast2"
   purpose       = "PRIVATE_SERVICE_CONNECT"
   role          = "ACTIVE"
-  network       = "default"
+  network       = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
   depends_on    = [google_project_service.compute]
 }
 

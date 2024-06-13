@@ -5,8 +5,8 @@ resource "google_compute_region_network_endpoint_group" "syd_psc" {
   region                = "australia-southeast1"
   depends_on            = [google_project_service.compute_consumer]
   psc_target_service    = google_compute_service_attachment.syd.id
-  network               = "https://www.googleapis.com/compute/v1/projects/${var.consumer_project}/global/networks/default"
-  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.consumer_project}/regions/australia-southeast1/subnetworks/default"
+  network               = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
+  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/regions/australia-southeast1/subnetworks/default"
 }
 
 resource "google_compute_region_network_endpoint_group" "mel_psc" {
@@ -16,6 +16,6 @@ resource "google_compute_region_network_endpoint_group" "mel_psc" {
   region                = "australia-southeast2"
   depends_on            = [google_project_service.compute_consumer]
   psc_target_service    = google_compute_service_attachment.mel.id
-  network               = "https://www.googleapis.com/compute/v1/projects/${var.consumer_project}/global/networks/default"
-  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.consumer_project}/regions/australia-southeast2/subnetworks/default"
+  network               = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
+  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/regions/australia-southeast2/subnetworks/default"
 }

@@ -24,20 +24,20 @@ resource "tls_self_signed_cert" "ilb" {
 
 resource "google_compute_subnetwork" "ilb_proxy_subnet_syd" {
   provider      = google-beta
-  project       = var.producer_project
+  project       = var.network_project
   name          = "ilb-proxy-subnet-syd"
   ip_cidr_range = "10.0.0.0/24"
   region        = "australia-southeast1"
   purpose       = "REGIONAL_MANAGED_PROXY"
   role          = "ACTIVE"
-  network       = "default"
+  network       = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
   depends_on    = [google_project_service.compute]
 }
 
 resource "google_compute_address" "ilb_syd" {
   project      = var.producer_project
   name         = "ilb-address-syd"
-  subnetwork   = "https://www.googleapis.com/compute/v1/projects/${var.producer_project}/regions/australia-southeast1/subnetworks/default"
+  subnetwork   = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/regions/australia-southeast1/subnetworks/default"
   address_type = "INTERNAL"
   address      = "10.152.0.40"
   region       = google_compute_subnetwork.ilb_proxy_subnet_syd.region
@@ -53,8 +53,8 @@ resource "google_compute_forwarding_rule" "ilb_syd" {
   load_balancing_scheme = "INTERNAL_MANAGED"
   depends_on            = [google_compute_subnetwork.ilb_proxy_subnet_syd, google_project_service.compute]
   ip_address            = google_compute_address.ilb_syd.address
-  network               = "default"
-  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.producer_project}/regions/australia-southeast1/subnetworks/default"
+  network               = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
+  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/regions/australia-southeast1/subnetworks/default"
   region                = "australia-southeast1"
   allow_global_access   = true
 }
@@ -124,20 +124,20 @@ resource "google_compute_region_network_endpoint_group" "syd" {
 
 resource "google_compute_subnetwork" "ilb_proxy_subnet_mel" {
   provider      = google-beta
-  project       = var.producer_project
+  project       = var.network_project
   name          = "ilb-proxy-subnet-mel"
   ip_cidr_range = "10.1.0.0/24"
   region        = "australia-southeast2"
   purpose       = "REGIONAL_MANAGED_PROXY"
   role          = "ACTIVE"
-  network       = "default"
+  network       = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
   depends_on    = [google_project_service.compute]
 }
 
 resource "google_compute_address" "ilb_mel" {
   project      = var.producer_project
   name         = "ilb-address-mel"
-  subnetwork   = "https://www.googleapis.com/compute/v1/projects/${var.producer_project}/regions/australia-southeast2/subnetworks/default"
+  subnetwork   = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/regions/australia-southeast2/subnetworks/default"
   address_type = "INTERNAL"
   address      = "10.192.0.40"
   region       = google_compute_subnetwork.ilb_proxy_subnet_mel.region
@@ -152,8 +152,8 @@ resource "google_compute_forwarding_rule" "ilb_mel" {
   load_balancing_scheme = "INTERNAL_MANAGED"
   depends_on            = [google_compute_subnetwork.ilb_proxy_subnet_mel, google_project_service.compute]
   ip_address            = google_compute_address.ilb_mel.address
-  network               = "default"
-  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.producer_project}/regions/australia-southeast2/subnetworks/default"
+  network               = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/global/networks/default"
+  subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.network_project}/regions/australia-southeast2/subnetworks/default"
   region                = "australia-southeast2"
   allow_global_access   = true
 }
